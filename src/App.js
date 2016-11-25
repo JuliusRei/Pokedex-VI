@@ -5,7 +5,7 @@ import './App.css';
 import Request from 'superagent';
 
 var Comment = React.createClass({
-  
+
   render(){
     
     return(<div className = "leftclass col-xs-4" >
@@ -45,6 +45,7 @@ var type = this.props.types;
       <div className = "col-xs-12" style = {border}>
       <p>Pokemon ID: #{this.props.id}</p>
       <p>Name: {this.props.name}</p>
+      <p>Height : {this.props.height}</p>
       <p>Weight : {this.props.weight}</p>
       <p>Type: {type}</p>
       <p>Abilities: {abilities}</p>
@@ -65,8 +66,8 @@ getInitialState(){
           abilities : "",
           sprite:"",
           shiny:"",
-          isdisabled:"true"
-
+          isdisabled:"true",
+          stat2:""
           }
 },
 handleInput(name){
@@ -78,6 +79,7 @@ var url = "http://pokeapi.co/api/v2/pokemon/"+this.state.name;
     this.setState({
       pokemonname:response.body.name,
       stat:response.body.weight,
+      stat2:response.body.height,
       sprite:response.body.sprites.front_default,
       shiny:response.body.sprites.front_shiny,
       id:response.body.id,
@@ -118,7 +120,7 @@ var style = {
       </div>
         <Detail name = {this.state.pokemonname} sprite = {this.state.sprite} 
         weight = {this.state.stat} shiny = {this.state.shiny} ability = {this.state.abilities}
-        types = {this.state.type} id = {this.state.id}/>
+        types = {this.state.type} id = {this.state.id} height = {this.state.stat2}/>
         <Comment isdisabled = {this.state.disabled}/>
 
       </div>
