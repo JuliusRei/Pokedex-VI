@@ -1,60 +1,9 @@
-
 import React from 'react';
 import head from './Pokemon.png';
 import './App.css';
 import Request from 'superagent';
-import axios from 'axios';
-var Comment = React.createClass({
-
-  render(){
-
-    return(<div className="leftclass col-xs-4" >
-      <h1  style={{color:"black"}}> Comment Area</h1>
-      <textarea onChange = {this.props.onTextChange} className="form-control" style={{marginBottom: "1%"}}></textarea>
-      <button onClick = {this.props.onSubmit} id="btnsave" className="btn btn-info"  >Leave a Comment</button>
-      <div className="col-xs-12 commentArea" style={{color:"white"}} ></div>
-      </div>);
-  }
-});
-var Detail = React.createClass({
-
-  render(){
-    var border={
-      border: "3px solid black",
-      backgroundColor:"white",
-      paddingTop:"3px"
-    };
-    var abilities = this.props.ability;
-    var type = this.props.types;
-    if(type !== ""){
-      type = this.props.types.map((n)=> {return "/"+n.type.name + "/"}); 
-      abilities = this.props.ability.map((n)=> {return "/"+n.ability.name + "/"});
-    }
-    else{
-      type = "-"; 
-      abilities = "-";         }
-
-      return(
-        <div className="leftclass col-xs-4">
-        <h1 style={{color:"black"}}> Pokemon Descripton</h1>
-        <div className="form-group">
-        <div className="col-xs-6" style={border}>
-        <img alt="default" className="sprite" src={this.props.sprite}/><p>Original</p></div>
-        <div className="col-xs-6" style={border}>
-        <img alt="shiny" className="sprite" src={this.props.shiny}/><p>Shiny</p></div></div>
-        <div className="col-xs-12" style={border}>
-        <p>Pokemon ID: #{this.props.id}</p>
-        <p>Name: {this.props.name}</p>
-        <p>Height : {this.props.height}</p>
-        <p>Weight : {this.props.weight}</p>
-        <p>Type: {type}</p>
-        <p>Abilities: {abilities}</p>
-        </div>
-        </div>);
-    }
-  });
-
-
+import Comment from './Components/Comment.js';
+import Detail from './Components/Detail.js';
 
 var App = React.createClass({
   getInitialState(){
@@ -62,8 +11,8 @@ var App = React.createClass({
     stat: "",
     id:'',
     pokemonname : "",
-    type : "",
-    abilities : "",
+    type : [],
+    abilities : [],
     sprite:"",
     shiny:"",
     isdisabled:true,
@@ -113,13 +62,14 @@ Request.post(url)
        .send({author: this.state.pokemonname,
         text:this.state.comment,})
        .end(alert('Comment Posted'))
+       this.ReturnType();
 },
 ReturnType(){
   var url = 'http://localhost:3000/api/comments';
   Request.get(url)
          .then((n)=>{
-          n.filter((response)=>{
-            response.author === this.state.pokemonname ? this.state.data.push(response) : null
+          this.setState({
+            data : n
           })
          });
 },
@@ -155,7 +105,8 @@ render() {
             weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
             types={this.state.type} id={this.state.id} height={this.state.stat2}/>
     {this.state.isdisabled ? null : <Comment onTextChange = {this.handleCommentChange}
-              onSubmit = {this.handleComment} />}
+              onSubmit = {this.handleComment} data = {this.state.data} name = {this.state.pokemonname}
+            />}
 
     </div>
     );
