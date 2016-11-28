@@ -4,7 +4,7 @@ import './App.css';
 import Request from 'superagent';
 import Comment from './Components/Comment.js';
 import Detail from './Components/Detail.js';
-
+import Search from './Components/Search.js';
 var App = React.createClass({
   getInitialState(){
     return {name : "",
@@ -74,10 +74,7 @@ ReturnType(){
          });
 },
 render() {
-  var style = {
-    backgroundColor: 'transparent',
-
-  };
+ 
 
   return (
 
@@ -85,22 +82,7 @@ render() {
 
     <div className="App-header col-xs-12"><p> <img src={head} alt="header" className="head" /></p>
     </div>
-    <div className="form-group leftclass  col-xs-4" style={style}>
-    <h1 style={{color:"black"}}> Search for a Pokemon</h1>
-    <input value={this.state.name}  className="form-control" onChange={this.handleInput} type="text"/>
-
-    <button onClick={this.handleClick} className="btn btn-circle btn-lg btn-danger" style={{marginTop:"3%"}}> Search</button>
-    <div className="commentArea" style={{color:"white"}}>
-    <h4>Pokedex Generation VI</h4><hr/>
-    <p>This is Pokedex Gen VI, a portable search engine for searching your favorite pokemon</p>
-    <p>Features:</p>
-
-    - Search Engine<br/>
-    - Pokemon Description<br/>
-    - Comment Area <br/>
-
-    </div>
-    </div>
+    <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
     <Detail name={this.state.pokemonname} sprite={this.state.sprite} 
             weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
             types={this.state.type} id={this.state.id} height={this.state.stat2}/>
@@ -111,6 +93,6 @@ render() {
     </div>
     );
 }
-});
+})
 
 export default App;
