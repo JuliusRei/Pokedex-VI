@@ -1,4 +1,6 @@
 import React from 'react'; 
+import Gyarados from './../Hidden/gyarados.gif';
+import Pika from './../Hidden/pikachu.gif';
 var border={
       border: "3px solid black",
       backgroundColor:"white",
@@ -24,7 +26,9 @@ var Detail = React.createClass({
 
   render(){
    
- 
+      var gya;
+      {this.props.name === "gyarados" ?gya = Gyarados : this.props.name === "pikachu"? gya = Pika :gya = this.props.sprite}
+  
       const type = this.props.types.map((n)=> {return "/"+n.type.name + "/"}); 
       const abilities = this.props.ability.map((n)=> {return "/"+n.ability.name + "/"});
   
@@ -33,7 +37,7 @@ var Detail = React.createClass({
         <div className="leftclass col-xs-4">
         <h1 style={{color:"black"}}> Pokemon Descripton</h1>
         <div className="form-group">
-        <Original sprite = {this.props.sprite}  />
+        <Original sprite = {gya}  />
         <Shiny shine = {this.props.shiny}  />
         </div>
         <div className="col-xs-12" style={border}>

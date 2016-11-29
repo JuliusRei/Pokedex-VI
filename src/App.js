@@ -56,7 +56,7 @@ handleClick(){
 
     }); }
   })
-this.ReturnType();
+
 }, 
 handleCommentChange(e){
   this.setState({
@@ -69,10 +69,7 @@ handleComment(){
 Request.post(url)
        .send({author: this.state.pokemonName,
         text:this.state.comment,})
-       .end(()=>{alert('Comment Posted')
-        this.setState({
-          isSubmitted : true
-        })})
+       .end()
        
 },
 ReturnType(){
@@ -84,14 +81,15 @@ ReturnType(){
           })
          });
 },
+
+
 render() {
-    this.ReturnType();
+   this.ReturnType();
   return (
 
     <div className="App col-xs-12">
 
     <div className="App-header col-xs-12"><p> 
-    
     
     <img src={Lucian} alt="header"  />
     <img src={pokeball} alt="header" className="App-logo" />
