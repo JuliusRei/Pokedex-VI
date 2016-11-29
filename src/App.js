@@ -66,49 +66,53 @@ handleCommentChange(e){
 handleComment(){
 
   var url = 'http://localhost:3000/api/comments';
-Request.post(url)
-       .send({author: this.state.pokemonName,
-        text:this.state.comment,})
-       .end()
-       
+  Request.post(url)
+  .send({author: this.state.pokemonName,
+    text:this.state.comment,})
+  .end(()=>{this.setState({
+    comment : ""
+  });
+})
+
+  
 },
 ReturnType(){
   var url = 'http://localhost:3000/api/comments';
   Request.get(url)
-         .then((n)=>{
-          this.setState({
-            data : n
-          })
-         });
+  .then((n)=>{
+    this.setState({
+      data : n
+    })
+  });
 },
 
 
 render() {
-   this.ReturnType();
-  return (
+ this.ReturnType();
+ return (
 
-    <div className="App col-xs-12">
+  <div className="App col-xs-12">
 
-    <div className="App-header col-xs-12"><p> 
-    
-    <img src={Lucian} alt="header"  />
-    <img src={pokeball} alt="header" className="App-logo" />
-    <img src={head} alt="header" className="head" />
-    <img src={pokeball} alt="header" className="App-logo2" />
-    <img src={Bertha} alt="header" />
-    </p>
-    </div>
-    <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
-    <Detail name={this.state.pokemonName} sprite={this.state.sprite} 
-            weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
-            types={this.state.type} id={this.state.id} height={this.state.stat2}/>
-    {this.state.isdisabled ? null : <Comment onTextChange = {this.handleCommentChange}
-                                     onSubmit = {this.handleComment} data = {this.state.data}
-                                     name = {this.state.pokemonName} isSubmitted = {this.state.isSubmitted}
-            />}
+  <div className="App-header col-xs-12"><p> 
+  
+  <img src={Lucian} alt="header"  />
+  <img src={pokeball} alt="header" className="App-logo" />
+  <img src={head} alt="header" className="head" />
+  <img src={pokeball} alt="header" className="App-logo2" />
+  <img src={Bertha} alt="header" />
+  </p>
+  </div>
+  <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
+  <Detail name={this.state.pokemonName} sprite={this.state.sprite} 
+  weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
+  types={this.state.type} id={this.state.id} height={this.state.stat2}/>
+  {this.state.isdisabled ? null : <Comment onTextChange = {this.handleCommentChange} comment = {this.state.comment}
+  onSubmit = {this.handleComment} data = {this.state.data}
+  name = {this.state.pokemonName} isSubmitted = {this.state.isSubmitted}
+  />}
 
-    </div>
-    );
+  </div>
+  );
 }
 })
 
