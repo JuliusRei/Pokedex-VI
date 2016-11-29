@@ -5,6 +5,9 @@ import Request from 'superagent';
 import Comment from './Components/Comment.js';
 import Detail from './Components/Detail.js';
 import Search from './Components/Search.js';
+import pokeball from './Pokeball.svg';
+import Lucian from './Lucian.gif';
+import Bertha from './Bertha.gif';
 var App = React.createClass({
   getInitialState(){
     return {
@@ -87,7 +90,15 @@ render() {
 
     <div className="App col-xs-12">
 
-    <div className="App-header col-xs-12"><p> <img src={head} alt="header" className="head" /></p>
+    <div className="App-header col-xs-12"><p> 
+    
+    
+    <img src={Lucian} alt="header"  />
+    <img src={pokeball} alt="header" className="App-logo" />
+    <img src={head} alt="header" className="head" />
+    <img src={pokeball} alt="header" className="App-logo2" />
+    <img src={Bertha} alt="header" />
+    </p>
     </div>
     <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
     <Detail name={this.state.pokemonName} sprite={this.state.sprite} 
