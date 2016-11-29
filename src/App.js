@@ -7,18 +7,22 @@ import Detail from './Components/Detail.js';
 import Search from './Components/Search.js';
 var App = React.createClass({
   getInitialState(){
-    return {name : "",
-    stat: "",
+    return {
+    // For Searching Pokemon
+    name : "",
+    // For Viewing Pokemon
     id:'',
-    pokemonname : "",
-    type : [],
-    abilities : [],
+    pokemonName : "",
+    stat: "",  
     sprite:"",
     shiny:"",
     isdisabled:true,
-    stat2:"",
+    stat2:"", type : [],
+    abilities : [],
+    // For Comment Handling
     comment:"",
-    data:[]
+    data:[],
+    isSubmitted:false
 
   }
 },
@@ -37,7 +41,7 @@ handleClick(){
     });
    } else {
     this.setState({
-      pokemonname:response.body.name,
+      pokemonName:response.body.name,
       stat:response.body.weight,
       stat2:response.body.height,
       sprite:response.body.sprites.front_default,
@@ -46,6 +50,7 @@ handleClick(){
       type: response.body.types,
       abilities:response.body.abilities,
       isdisabled: false
+
     }); }
   })
 this.ReturnType();
@@ -59,10 +64,13 @@ handleComment(){
 
   var url = 'http://localhost:3000/api/comments';
 Request.post(url)
-       .send({author: this.state.pokemonname,
+       .send({author: this.state.pokemonName,
         text:this.state.comment,})
-       .end(alert('Comment Posted'))
-       this.ReturnType();
+       .end(()=>{alert('Comment Posted')
+        this.setState({
+          isSubmitted : true
+        })})
+       
 },
 ReturnType(){
   var url = 'http://localhost:3000/api/comments';
@@ -74,8 +82,7 @@ ReturnType(){
          });
 },
 render() {
- 
-
+    this.ReturnType();
   return (
 
     <div className="App col-xs-12">
@@ -83,11 +90,12 @@ render() {
     <div className="App-header col-xs-12"><p> <img src={head} alt="header" className="head" /></p>
     </div>
     <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
-    <Detail name={this.state.pokemonname} sprite={this.state.sprite} 
+    <Detail name={this.state.pokemonName} sprite={this.state.sprite} 
             weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
             types={this.state.type} id={this.state.id} height={this.state.stat2}/>
     {this.state.isdisabled ? null : <Comment onTextChange = {this.handleCommentChange}
-              onSubmit = {this.handleComment} data = {this.state.data} name = {this.state.pokemonname}
+                                     onSubmit = {this.handleComment} data = {this.state.data}
+                                     name = {this.state.pokemonName} isSubmitted = {this.state.isSubmitted}
             />}
 
     </div>
