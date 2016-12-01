@@ -2,7 +2,7 @@ import React from 'react';
 
 var Search = React.createClass({
 	handleKeyPress(target) {
-    if(target.charCode==13){
+    if(target.charCode===13){
             this.props.handleClick();    
     }
 

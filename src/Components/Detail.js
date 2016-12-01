@@ -29,16 +29,16 @@ var Detail = React.createClass({
       var gya;
       {this.props.name === "gyarados" ?gya = Gyarados : this.props.name === "pikachu"? gya = Pika :gya = this.props.sprite}
   
-      const type = this.props.types.map((n)=> {return "/"+n.type.name + "/"}); 
-      const abilities = this.props.ability.map((n)=> {return "/"+n.ability.name + "/"});
+      const type = this.props.types.map((n)=> {return "| "+n.type.name + " |"}); 
+      const abilities = this.props.ability.map((n)=> {return "| "+n.ability.name + " |"});
   
 
       return(
         <div className="leftclass col-xs-4">
         <h1 style={{color:"black"}}> Pokemon Descripton</h1>
         <div className="form-group">
-        <Original sprite = {gya}  />
-        <Shiny shine = {this.props.shiny}  />
+        <Original sprite={gya}/>
+        <Shiny shine={this.props.shiny} />
         </div>
         <div className="col-xs-12" style={border}>
         <p>Pokemon ID: #{this.props.id}</p>

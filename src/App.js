@@ -102,13 +102,13 @@ render() {
   <img src={Bertha} alt="header" />
   </p>
   </div>
-  <Search handleInput = {this.handleInput} handleClick = {this.handleClick}/>
+  <Search handleInput={this.handleInput} handleClick={this.handleClick}/>
   <Detail name={this.state.pokemonName} sprite={this.state.sprite} 
   weight={this.state.stat} shiny={this.state.shiny} ability={this.state.abilities}
   types={this.state.type} id={this.state.id} height={this.state.stat2}/>
-  {this.state.isdisabled ? null : <Comment onTextChange = {this.handleCommentChange} comment = {this.state.comment}
-  onSubmit = {this.handleComment} data = {this.state.data}
-  name = {this.state.pokemonName} isSubmitted = {this.state.isSubmitted}
+  {this.state.isdisabled ? null : <Comment onTextChange={this.handleCommentChange} comment={this.state.comment}
+  onSubmit={this.handleComment} data={this.state.data}
+  name={this.state.pokemonName} isSubmitted={this.state.isSubmitted}
   />}
 
   </div>
